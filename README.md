@@ -12,3 +12,6 @@ rust 공부 정리 &amp; 연습장
   - [제로부터 시작하는 러스트 백엔드 프로그래밍](https://product.kyobobook.co.kr/detail/S000212216062)
   - [한 줄 한 줄 짜면서 익히는 러스트 프로그래밍](https://product.kyobobook.co.kr/detail/S000061351231)
   - [Easy Rust](https://github.com/Dhghomon/easy_rust)
+
+### 주차 정리
+- [week1](https://github.com/saseungmin/learning_rust/tree/main/week1)
