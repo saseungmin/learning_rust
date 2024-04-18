@@ -43,6 +43,32 @@ let owned_string: String = str_literal.into();
 ```
 
 ### modules
+```rust
+mod sausage_factory {
+    // Don't let anybody outside of this module see this!
+    fn get_secret_recipe() -> String {
+        String::from("Ginger")
+    }
+
+    pub fn make_sausage() {
+        get_secret_recipe();
+        println!("sausage!");
+    }
+}
+```
+
+- 모듈에 `pub`키워드를 사용하여 모듈을 공개해도 모듈의 내용은 비공개.
+- 모듈을 공개했다고 해서 내용까지 공개되지는 않는다. 모듈의 `pub`키워드는 상위 모듈이 해당 모듈을 가리킬 수 있도록 할 뿐, 그 내부 코드에 접근하도록 하는 것은 아님. 모듈은 단순한 컨테이너이기 때문에 모듈을 공개하는 것만으로는 할 수 있는 것은 별로 없음.
+- 모듈이 가지고 있는 아이템도 마찬가지로 공개해야함.
+- 크레이트: 라이브러리나 실행가능한 모듈로 구성된 트리 구조로 러스트가 한 번의 컴파일 시 고려하는 가장 작은 코드 단위.
+
+```rust
+// 절대 경로: 크레이트 루트로부터 시작되는 전체 경로. 외부 크레이트로부터의 코드에 대해서는 해당 크레이트 이름으로 절대 경로가 시작되고 현재의 크레이트로부터의 코드에 대해서는 crate리터럴로부터 시작된다.
+crate::sausage_factory::make_sausage();
+// 상대 경로
+sausage_factory::make_sausage();
+```
+
 
 ### hashmaps
 
