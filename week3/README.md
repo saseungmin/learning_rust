@@ -69,6 +69,22 @@ crate::sausage_factory::make_sausage();
 sausage_factory::make_sausage();
 ```
 
+- `use` 키워드를 사용하면 어떤 경로의 단축경로(shortcut)를 만들 수 있고, 그러면 스코프 안쪽 어디서라도 짧은 이름을 사용할 수 있다. 
+- `use`가 사용된 특정 스코프에서만 단축경로가 만들어진다.
+- `use` 키워드로 동일한 이름의 타입을 스코프로 여러 개 가져올 경우 경로 뒤에 `as` 키워드를 작성하고, 새로운 이름이나 타입 별칭을 작성하면 된다.
+- `pub use`로 다시 내보내기 가능.
+
+```rust
+pub use self::fruits::PEAR as fruit;
+pub use self::veggies::CUCUMBER as veggie;
+```
+
+```rust
+// glob 연산자 *를 붙이면 경로 안에 정의된 모든 공개 아이템을 가져올 수 있다. 
+use std::time::*;
+// 두 경로를 use 구문 하나로 합치기
+use std::time::{ UNIX_EPOCH, SystemTime };
+```
 
 ### hashmaps
 
