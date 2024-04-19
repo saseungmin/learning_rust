@@ -130,3 +130,47 @@ team_1_scores.goals_conceded += team_2_score;
 ```
 
 ### options
+- `Option` 타입은 값이 있거나 없을 수 있다.
+- 러스트는 null 값으로 발생하는 문제를 제거하기 위해서 널 개념이 없다.
+- 대신에 러스트에는 널이 없지만, 값의 존재 혹은 부재의 개념을 표현할 수 있는 열거형이 있다. 이 열거형이 바로 `Option<T>`이며, 표준 라이브러리에 정의되어 있다.
+
+```rust
+enum Option<T> {
+  None,
+  Some(T),
+}
+```
+
+- `if let` 구문을 사용해서 `optional_target`이 `Some` 유형인 경우에만 실행된다.
+
+```rust
+fn simple_option() {
+    let target = "rustlings";
+    let optional_target = Some(target);
+
+    if let Some(word) = optional_target {
+        assert_eq!(word, target);
+    }
+}
+```
+
+- `ref` 키워드는 `match` 패턴에서 변수를 참조로 바인딩하는 데 사용.
+- `match` 패턴에서 변수를 바인딩할 때, 해당 변수는 값을 소비되는데, 변수가 패턴에 바인딩되면 그 변수는 소비되어 원래의 값이 이동(move)하게 된다. 하지만 `ref` 키워드를 사용하면 변수를 참조로 바인딩하여 원래 값이 소비되지 않고 참조만 바인딩된다.
+- 이렇게 `ref`를 사용하면 원래 값이 유지되어야 하는 상황에서 유용한데, 아래 코드에서 `y` 변수는 여전히 원래의 `Option<Point>` 값을 소유하게 된다.
+
+```rust
+fn main() {
+    let y: Option<Point> = Some(Point { x: 100, y: 200 });
+
+    match y {
+        Some(ref p) => println!("Co-ordinates are {},{} ", p.x, p.y),
+        _ => panic!("no match!"),
+    }
+    y; // Fix without deleting this line.
+}
+```
+
+- `&`와 `ref`의 차이점
+  - `&`는 참조 연산자로 변수 앞에 `&`를 사용하면 해당 변수의 참조를 만든다. 이 경우에는 변수를 참조로 바인딩하게 된다.
+  - `ref`는 패턴 매칭에서 변수를 참조로 바인딩하는데 `ref` 키워드는 `match` 패턴에서만 사용된다. `match` 패턴에서 변수를 바인딩할 때, 그 변수가 값을 소비하는 대신 참조로 바인딩되도록 한다.
+  - 주요 차이점은 `&`는 참조를 생성하는 연산자이고, `ref`는 `match` 패턴에서 변수를 참조로 바인딩하는 데 사용되는 키워드.
