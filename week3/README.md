@@ -87,5 +87,46 @@ use std::time::{ UNIX_EPOCH, SystemTime };
 ```
 
 ### hashmaps
+- 서로 연관된 친구들 저장.
+- 임의 타입으로 된 키를 이용하여 데이터를 찾을 때 유용.
+
+```rust
+
+fn fruit_basket() -> HashMap<String, u32> {
+  // hashMap 생셩
+  let mut basket = HashMap::new();
+
+  // 요소 추가
+  basket.insert(String::from("banana"), 2);
+
+  basket
+}
+```
+
+- 요소에 접근하려면 `get` 메서드 사용.
+- `get`메서드는 Option<&V>를 반환함. 만약에 해당 키에 대한 값이 없으면 `get`은 `None`을 반환함.
+- 따라서 `copied`를 호출하여 `Option<&u32>`이 아닌 `Option<u32>`를 얻어온 다음, `unwrap_or`를 써서 해당 키에 대한 아이템을 가지고 있지 않응 경우 0을 설정하도록 처리할 수 있음.
+
+```rust
+basket.get("apple").copied().unwrap_or(0);
+```
+
+- `entry` 메서드를 사용하면 키가 없을때만 키와 값 추가할 수 있다.
+
+```rust
+basket.entry(fruit).or_insert(1);
+```
+
+- 해시 맵은 키에 대한 값을 찾아서 예전 값에 기초하여 값을 업데이트함.
+
+```rust
+let team_1_scores = scores.entry(team_1_name).or_insert(Team {
+    goals_scored: 0,
+    goals_conceded: 0
+});
+
+team_1_scores.goals_scored += team_1_score;
+team_1_scores.goals_conceded += team_2_score;
+```
 
 ### options
