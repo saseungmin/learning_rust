@@ -17,3 +17,4 @@ rust 공부 정리 &amp; 연습장
 - [week1](https://github.com/saseungmin/learning_rust/tree/main/week1)
 - [week2](https://github.com/saseungmin/learning_rust/tree/main/week2)
 - [week3](https://github.com/saseungmin/learning_rust/tree/main/week3)
+- [week4](https://github.com/saseungmin/learning_rust/tree/main/week4)
