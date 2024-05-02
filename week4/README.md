@@ -62,6 +62,30 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 ### generics
 
+```rust
+enum Option<T> {
+  Some(T),
+  None,
+}
+
+enum Result<T, E> {
+  Ok(T),
+  Err(E),
+}
+
+struct Wrapper<T> {
+    value: T,
+}
+
+impl<T> Wrapper<T> {
+    pub fn new(value: T) -> Self {
+        Wrapper { value }
+    }
+}
+```
+
+`impl` 바로 뒤에 `T`를 선언하여 `Wrapper<T>` 타입에 메서드를 구현한다고 명시했음을 주의. 이렇게 하면 러스트는 `Wrapper`의 부등호 기호 내 타입이 구체적인 타입이 아닌 제네릭 타입임을 인지한다.
+
 ### traits
 
 ### lifetimes
