@@ -245,6 +245,46 @@ fn longest<'a>(x: &str, y: &str) -> &'a str {
 }
 ```
 
+구조체의 라이프타임
+
+```rust
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
+}
+```
+
+라이프타임 생략   
+- 초반 러스트는 생략되지 않았음.
+1. 매개변수가 하나인 함수는 lifetime 매개변수 하나
+   - `fn foo<'a, 'b>(x: &'a i32, y: &'b i32)`
+2. 정확히 하나의 입력 lifetime 매개변수가 있는 경우 해당 lifetime이 모든 출력 lifetime 매개변수에 할당
+   - `fn foo<'a>(x: &'a i32) -> &'a i32`
+3. 메소드인 경우 여러 개의 입력 lifetime 매개변수가 있지만 그 중 하나가 메소드 `&self`이거나 `&mut self`메소드이기 때문에 모든 출력 lifetime 매개변수에 lifetime이 `self` 할당
+
+
+```rust
+fn first_word(s: &str) -> &str {
+fn first_word<'a>(s: &'a str) -> &'a str {
+
+fn longest(x: &str, y: &str) -> &str {
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &str {
+
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+```
+
 정적 라이프타임은 `'static` 라이프타임은 해당 참조자가 프로그램의 전체 생애주기 동안 살아 있음을 의미. 모든 문자열 리터럴은 `'static` 라이프타임을 가진다.
 
 ```rust
